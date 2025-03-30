@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\Model\Rank;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,8 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'point',
         'role',
+        'point',
         'rank',
     ];
 
@@ -36,19 +38,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function updateRank()
+    public function updateRank(): void
     {
-        if ($this->point >= 1000 && $this->point < 2000) {
-            $this->rank = 'سفيرة';
-        } elseif ($this->point >= 2000 && $this->point < 3000) {
-            $this->rank = 'أميرة';
-        } elseif ($this->point >= 3000) {
-            $this->rank = 'ملكة';
-        } else {
-            $this->rank = 'مبتدئ'; // في حالة النقاط أقل من 1000
-        }
+        $rank = Rank::where('points', '<=', $this->point)
+            ->orderByDesc('points')
+            ->first();
 
+        $this->rank = $rank ? $rank->name : 'مبتدئ';
         $this->save();
     }
-
 }

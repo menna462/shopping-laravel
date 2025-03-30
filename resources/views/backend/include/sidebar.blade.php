@@ -49,6 +49,11 @@
                 <span class="ml-1 item-text">Orders</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('ranks') }}">
+                <span class="ml-1 item-text">Rank</span>
+            </a>
+        </li>
         </ul>
       </li>
     </ul>

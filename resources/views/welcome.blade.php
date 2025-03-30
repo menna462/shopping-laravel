@@ -14,10 +14,9 @@
                                 متألقة دائما</h6>
                             <h1 class="display-3 text-white mb-4 animated slideInDown">كوني ملكة مع متجر Queen Store
                             </h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">عضوية
+                            <a href="{{ Auth::check() ? route('home') : route('register') }}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">عضوية
                                 جديدة</a>
-                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">الحصول على
-                                النقاط</a>
+                            <a href="{{ url('#promotion-system') }}" class="btn btn-light py-md-3 px-md-5 animated slideInRight" style=" scroll-behavior: smooth;">نظام الترقيات</a>
                         </div>
                     </div>
                 </div>
@@ -31,9 +30,8 @@
                                 العناية بمكان واحد</h6>
                             <h1 class="display-3 text-white mb-4 animated slideInDown">يوفر لك متجر Queen Store جميع
                                 منتجات العناية</h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">منتجاتنا</a>
-                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">الاقسام
-                                الرىيسية</a>
+                            <a href="{{ Auth::check() ? route('home') : route('register') }}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">عضويه جديده</a>
+                            <a href="{{ url('#promotion-system') }}" class="btn btn-light py-md-3 px-md-5 animated slideInRight">نظام الترقيات</a>
                         </div>
                     </div>
                 </div>
@@ -95,36 +93,22 @@
         <a href={{ route('shop') }} class="btn btn-primary">عرض المزيد</a>
     </div>
     <!-- Room End -->
-    <div class="container rock-box">
+    <div class="container rock-box" id="promotion-system">
         <p class="one-p">نظام الترقية</p>
         <div class="row">
-            <div class="col-md-4 ">
-                <div class="box" >
-                    <div class="rank-badge">1</div>
-                    <h2 class="title-one">سفيرة</h2>
-                    <h5 class="title-two">نقطه 1000</h5>
+            @foreach ($ranks as $rank)
+                <div class="col-md-4">
+                    <div class="box">
+                        <h2 class="title-one">{{ $rank->name }}</h2> <!-- اسم الرتبة -->
+                        <h5 class="title-two">{{ $rank->points }} نقطة</h5> <!-- عدد النقاط -->
+                        <p class="two-p">🎁 : {{ $rank->gift ?? 'لا توجد هدية' }}</p> <!-- الهدية -->
+                    </div>
                 </div>
-                <p class="two-p">هديه+خصم 1 شيكل</p>
-            </div>
-            <div class="col-md-4">
-                <div class="box" style="margin-top: 40px">
-                    <h2 class="title-one">أميرة</h2>
-                    <h5 class="title-two">نقطه 2000</h5>
-                    <div class="rank-badgetow">2</div>
-                </div>
-                <p class="two-p">هديه+خصم 2 شيكل</p>
-            </div>
-            <div class="col-md-4">
-                <div class="box">
-                    <div class="rank-badge">3</div>
-                    <h2 class="title-one">ملكة</h2>
-                    <h5 class="title-two">نقطه 3000</h5>
-                </div>
-                <p class="two-p">هديه+خصم 3 شيكل</p>
-            </div>
+            @endforeach
         </div>
-
     </div>
+
+
     <!-- Video Start -->
     <div class="container-xxl py-5 px-0 wow zoomIn" data-wow-delay="0.1s">
         <div class="row g-0">

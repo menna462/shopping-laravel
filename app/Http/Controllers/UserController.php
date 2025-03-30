@@ -20,7 +20,7 @@ class UserController extends Controller
 
      public function edit ($id){
         $user = User::findOrFail($id);
-        return view("user.edit",["result"=>$user]);
+        return view("User.edit",["result"=>$user]);
      }
     //  use Illuminate\Validation\Rule;
 

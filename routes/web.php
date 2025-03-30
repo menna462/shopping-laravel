@@ -8,6 +8,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RankController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,13 @@ Route::middleware('CheckAdmain')->group(function () {
     Route::get('/backend/products', [ProductController::class, 'index'])->name('products');
     Route::get('/backend/basicinfo', [BasicinfoController::class, 'index'])->name('basicinfo');
     Route::get('/backend/location', [LocationController::class, 'index'])->name('locations');
+    Route::get('/backend/rank', [RankController::class, 'index'])->name('ranks');
+
+    Route::get('/backend/ranks/create', [RankController::class, 'create'])->name('ranks.create');
+    Route::post('/backend/ranks', [RankController::class, 'store'])->name('ranks.store');
+    Route::get('/backend/ranks/{rank}/edit', [RankController::class, 'edit'])->name('ranks.edit');
+    Route::put('/backend/ranks/{rank}', [RankController::class, 'update'])->name('ranks.update');
+    Route::delete('/backend/ranks/{rank}', [RankController::class, 'destroy'])->name('ranks.destroy');
 
 
     // crud operation user
